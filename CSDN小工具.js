@@ -22,10 +22,7 @@
         var article_content = document.getElementById('article_content');
         article_content.removeAttribute('style');
 
-        var follow_text = document.querySelector('.follow-text');
-        follow_text.parentElement.parentElement.removeChild(follow_text.parentElement);
-
-        hide_article_box.parentElement.removeChild(hide_article_box);
+        hide_article_box.remove();
     }
 
 })();
