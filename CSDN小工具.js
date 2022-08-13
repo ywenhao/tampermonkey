@@ -19,8 +19,8 @@
     var hide_article_box = document.querySelector('.hide-article-box');
     if (hide_article_box && hide_article_box.style.display !== 'none' ) {
 
-        var article_content = document.getElementById("article_content");
-        article_content.removeAttribute("style");
+        var article_content = document.getElementById('article_content');
+        article_content.removeAttribute('style');
 
         var follow_text = document.querySelector('.follow-text');
         follow_text.parentElement.parentElement.removeChild(follow_text.parentElement);
