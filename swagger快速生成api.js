@@ -49,7 +49,7 @@
     name += method
     var titles = path
       .split('/')
-      .filter((item) => item && !item.includes('{'))
+      .filter((item) => item && !item.includes('{') && !/^v\d+$/.test(item))
       .map((str) => str.replace(str[0], str[0].toUpperCase()))
     name += titles.join('')
     if (apiTitle.includes('列表')) name += 'List'
