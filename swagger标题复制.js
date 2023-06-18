@@ -2,10 +2,11 @@
 // @name         swagger ui 复制标题
 // @namespace    http://tampermonkey.net/
 // @version      0.1
-// @description  try to take over the world!
-// @author       You
+// @description  copy swagger ui title.
+// @author       actions.win
 // @match        https://petstore.swagger.io/*
-// @icon         https://www.google.com/s2/favicons?sz=64&domain=swagger.io
+// @match        http://*/swagger*
+// @icon         https://petstore.swagger.io/favicon-32x32.png
 // @grant        none
 // ==/UserScript==
 
