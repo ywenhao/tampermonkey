@@ -5,7 +5,7 @@
 // @description  copy swagger ui title.
 // @author       actions.win
 // @match        https://petstore.swagger.io/*
-// @match        http://*/swagger*
+// @match        *://*/swagger*
 // @icon         https://petstore.swagger.io/favicon-32x32.png
 // @grant        none
 // ==/UserScript==
