@@ -2,7 +2,7 @@
 // @name         swagger ui 一键生成api
 // @namespace    http://tampermonkey.net/
 // @version      0.1
-// @description  copy swagger ui title.
+// @description  swagger ui generate api.
 // @author       actions.win
 // @match        https://petstore.swagger.io/*
 // @match        *://*/swagger*
