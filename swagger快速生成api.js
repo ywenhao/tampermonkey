@@ -110,10 +110,15 @@
     })
   }
 
-  setTimeout(() => {
-    var opblocksDoms = Array.from(
-      document.querySelectorAll('.opblock-tag-section')
-    )
-    generateApiBtn(opblocksDoms)
-  }, 500)
+  function start() {
+    setTimeout(() => {
+      var opblocksDoms = Array.from(
+        document.querySelectorAll('.opblock-tag-section')
+      )
+      generateApiBtn(opblocksDoms)
+    }, 500)
+  }
+  start()
+  var select = document.querySelector('.topbar #select')
+  select && select.addEventListener('change', start)
 })()
