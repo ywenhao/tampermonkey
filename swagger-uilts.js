@@ -110,7 +110,7 @@
   setTimeout(() => {
     var select = document.querySelector('.topbar #select')
     select && select.addEventListener('change', start)
-  })
+  }, 500)
 })()
 ;(function () {
   'use strict'
