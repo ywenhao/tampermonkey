@@ -5,7 +5,7 @@
 // @description  swagger ui generate api.
 // @author       actions.win
 // @match        https://petstore.swagger.io/*
-// @match        *://*/swagger*
+// @match        *://*/swagger-ui*
 // @icon         https://petstore.swagger.io/favicon-32x32.png
 // @grant        none
 // ==/UserScript==
@@ -46,17 +46,27 @@
   // 生成函数名
   function generateFunctionName(method, path, apiTitle) {
     var name = ''
-    name += method
+    if (['新增', '新建', '增加'].some((v) => apiTitle.includes(v)))
+      name += 'add'
+    else if (['修改', '更新', '切换', '更改'].some((v) => apiTitle.includes(v)))
+      name += 'update'
+    else name += method
     var titles = path
       .split('/')
       .filter((item) => item && !item.includes('{') && !/^v\d+$/.test(item))
       .map((str) => str.replace(str[0], str[0].toUpperCase()))
     name += titles.join('')
-    if (apiTitle.includes('列表')) name += 'List'
-    if (apiTitle.includes('详情') || apiTitle.includes('详细信息'))
-      name += 'Detail'
-    if (apiTitle.includes('批量') || path.includes('batch')) name += 'Batch'
-    if (path.includes('{') && path.includes('id')) name += 'ById'
+    var condition = apiTitle.includes('列表')
+    if (condition && !name.includes('List')) name += 'List'
+
+    condition = apiTitle.includes('详情') || apiTitle.includes('详细信息')
+    if (condition && !name.includes('Detail')) name += 'Detail'
+
+    condition = apiTitle.includes('批量') || path.includes('batch')
+    if (condition && !name.includes('Batch')) name += 'Batch'
+
+    condition = path.includes('{') && path.includes('id')
+    if (condition) name += 'ById'
     name += 'Api'
     return name
   }
