@@ -57,6 +57,7 @@
     var titles = path
       .split('/')
       .filter((item) => item && !item.includes('{') && !/^v\d+$/.test(item))
+      .flatMap((v) => v.split('-'))
       .map((str) => str.replace(str[0], str[0].toUpperCase()))
     name += titles.join('')
     var condition = apiTitle.includes('列表')
