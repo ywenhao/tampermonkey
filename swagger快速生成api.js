@@ -46,7 +46,7 @@
   // 生成函数名
   function generateFunctionName(method, path, apiTitle) {
     var name = ''
-    if (['新增', '新建', '增加'].some((v) => apiTitle.includes(v)))
+    if (['新增', '新建', '增加', '创建'].some((v) => apiTitle.includes(v)))
       name += 'add'
     else if (['修改', '更新', '切换', '更改'].some((v) => apiTitle.includes(v)))
       name += 'update'
@@ -59,7 +59,9 @@
     var condition = apiTitle.includes('列表')
     if (condition && !name.includes('List')) name += 'List'
 
-    condition = apiTitle.includes('详情') || apiTitle.includes('详细信息')
+    condition =
+      ['详情', '详细信息'].some((v) => apiTitle.includes(v)) ||
+      /^获取.*信息$/.test(apiTitle)
     if (condition && !name.includes('Detail')) name += 'Detail'
 
     condition = apiTitle.includes('批量') || path.includes('batch')
