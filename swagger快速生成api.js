@@ -46,7 +46,9 @@
   // 生成函数名
   function generateFunctionName(method, path, apiTitle) {
     var name = ''
-    if (['新增', '新建', '增加', '创建'].some((v) => apiTitle.includes(v)))
+    if (
+      ['新增', '新建', '增加', '创建', '添加'].some((v) => apiTitle.includes(v))
+    )
       name += 'add'
     else if (['修改', '更新', '切换', '更改'].some((v) => apiTitle.includes(v)))
       name += 'update'
