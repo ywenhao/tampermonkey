@@ -10,7 +10,7 @@
       (apiDom) => !apiDom.classList.contains('opblock-deprecated')
     )
     var text = ''
-    var titleDom = tag.querySelector('.nostyle span') || tag.querySelector('p')
+    var titleDom = tag.querySelector('p') || tag.querySelector('.nostyle span')
     var docTitle = titleDom.innerText
     text += `/**\n * @description: ${docTitle}\n */\n\n`
     apiDoms.forEach((apiDom) => {
