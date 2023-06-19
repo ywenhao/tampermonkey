@@ -22,7 +22,8 @@
       (apiDom) => !apiDom.classList.contains('opblock-deprecated')
     )
     var text = ''
-    var docTitle = tag.querySelector('p').innerText
+    var titleDom = tag.querySelector('.nostyle span') || tag.querySelector('p')
+    var docTitle = titleDom.innerText
     text += `/**\n * @description: ${docTitle}\n */\n\n`
     apiDoms.forEach((apiDom) => {
       var pathDom = apiDom.querySelector('.opblock-summary-path')
