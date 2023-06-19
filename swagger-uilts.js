@@ -107,8 +107,10 @@
     }, 500)
   }
   start()
-  var select = document.querySelector('.topbar #select')
-  select && select.addEventListener('change', start)
+  setTimeout(() => {
+    var select = document.querySelector('.topbar #select')
+    select && select.addEventListener('change', start)
+  })
 })()
 ;(function () {
   'use strict'
@@ -147,6 +149,8 @@
   }
 
   start()
-  var select = document.querySelector('.topbar #select')
-  select && select.addEventListener('change', start)
+  setTimeout(() => {
+    var select = document.querySelector('.topbar #select')
+    select && select.addEventListener('change', start)
+  }, 500)
 })()
