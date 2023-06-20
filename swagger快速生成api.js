@@ -52,7 +52,11 @@
       ['新增', '新建', '增加', '创建', '添加'].some((v) => apiTitle.includes(v))
     )
       name += 'add'
-    else if (['修改', '更新', '切换', '更改'].some((v) => apiTitle.includes(v)))
+    else if (
+      ['修改', '更新', '切换', '更改', '编辑', '重设'].some((v) =>
+        apiTitle.includes(v)
+      )
+    )
       name += 'update'
     else name += method
     var titles = path
