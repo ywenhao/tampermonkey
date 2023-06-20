@@ -34,9 +34,10 @@
       var method = methodDom.innerText.toLowerCase()
       text += `/** ${apiTitle} */\n`
       var params = method === 'get' ? 'params' : 'data'
-      var path2 = path.replace(
-        /\{(.*)\}/,
-        ($1, $2) => '${' + `${params + '.' + $2}` + '}'
+
+      var path2 = path.replaceAll(
+        /\{.+?\}/g,
+        ($1) => '${' + `${params + '.' + $1}` + '}'
       )
       var functionName = generateFunctionName(method, path, apiTitle)
       text += `export const ${functionName}: CommonAPI<'${path}', '${method}'> = (${params}) => defHttp.${method}(\`${path2}\`, { ${params} })\n\n`
