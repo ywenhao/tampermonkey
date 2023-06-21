@@ -53,6 +53,7 @@
     )
       name += 'add'
     else if (
+      method === 'put' ||
       ['修改', '更新', '切换', '更改', '编辑', '重设'].some((v) =>
         apiTitle.includes(v)
       )
