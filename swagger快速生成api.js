@@ -37,7 +37,7 @@
 
       var path2 = path.replaceAll(
         /\{.+?\}/g,
-        ($1) => '${' + `${params + '.' + $1}` + '}'
+        ($1) => '${' + `${params + '.' + $1.replace('{', '')}`
       )
       var functionName = generateFunctionName(method, path, apiTitle)
       text += `export const ${functionName}: CommonAPI<'${path}', '${method}'> = (${params}) => defHttp.${method}(\`${path2}\`, { ${params} })\n\n`
