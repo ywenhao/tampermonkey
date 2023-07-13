@@ -33,8 +33,7 @@
       var apiTitle = apiTitleDom.innerText
       var method = methodDom.innerText.toLowerCase()
       text += `/** ${apiTitle} */\n`
-      var params =
-        ['delete', 'get'].includes(method) === 'get' ? 'params' : 'data'
+      var params = ['delete', 'get'].includes(method) ? 'params' : 'data'
       var path2 = path.replaceAll(
         /\{.+?\}/g,
         ($1) => '${' + `${params + '.' + $1.replace('{', '')}`
