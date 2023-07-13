@@ -17,11 +17,14 @@
       var pathDom = apiDom.querySelector('.opblock-summary-path')
       var methodDom = apiDom.querySelector('.opblock-summary-method')
       var apiTitleDom = apiDom.querySelector('.opblock-summary-description')
+      var paramsDom = apiDom.querySelector('.parameters')
       var path = pathDom.dataset.path
       var apiTitle = apiTitleDom.innerText
       var method = methodDom.innerText.toLowerCase()
       text += `/** ${apiTitle} */\n`
-      var params = ['delete', 'get'].includes(method) ? 'params' : 'data'
+      var paramsIsBody =
+        paramsDom && !!paramsDom.querySelector('tr[data-param-in="body"]')
+      var params = paramsIsBody ? 'data' : 'params'
       var path2 = path.replaceAll(
         /\{.+?\}/g,
         ($1) => '${' + `${params + '.' + $1.replace('{', '')}`
