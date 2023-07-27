@@ -2,7 +2,7 @@
 // @name         gitlab修正clone地址
 // @namespace    http://tampermonkey.net/
 // @version      0.1
-// @description  try to take over the world!
+// @description  gitlab修正clone地址
 // @author       actions.win
 // @match        http://192.168.2.253/*
 // @match        http://gitlab.test.com/*
