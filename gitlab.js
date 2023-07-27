@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description  try to take over the world!
-// @author       You
+// @author       actions.win
 // @match        http://192.168.2.253/*
 // @match        http://gitlab.test.com/*
 // @icon         https://i.vimeocdn.com/portrait/72670399_60x60?subrect=69%2C60%2C307%2C298&r=cover
