@@ -22,8 +22,15 @@
       var apiTitle = apiTitleDom.innerText
       var method = methodDom.innerText.toLowerCase()
       text += `/** ${apiTitle} */\n`
+
+      var isClose = !apiDom.classList.contains('is-open')
+      var toggleButton = apiDom.querySelector('.opblock-summary-control')
+      isClose && toggleButton.click()
+      var paramsDom = apiDom.querySelector('.parameters')
       var paramsIsBody =
         paramsDom && !!paramsDom.querySelector('tr[data-param-in="body"]')
+      isClose && toggleButton.click()
+
       var params = paramsIsBody ? 'data' : 'params'
       var path2 = path.replaceAll(
         /\{.+?\}/g,
