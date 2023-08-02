@@ -7,11 +7,36 @@
 // @match        https://petstore.swagger.io/*
 // @match        *://*/swagger-ui*
 // @icon         https://petstore.swagger.io/favicon-32x32.png
-// @grant        none
+// @grant        unsafeWindow
+// @run-at       document-start
 // ==/UserScript==
 
 ;(function () {
   'use strict'
+
+  // 拦截fetch
+  var result
+  var oldFetch = unsafeWindow.fetch
+  unsafeWindow.fetch = function (...args) {
+    var prom = oldFetch.apply(this, args)
+    prom.then((res) => {
+      res
+        .clone()
+        .json()
+        .then((r) => {
+          if (
+            r &&
+            typeof r === 'object' &&
+            Reflect.has(r, 'swagger') &&
+            Reflect.has(r, 'paths')
+          ) {
+            result = r.paths
+          }
+        })
+      return res
+    })
+    return prom
+  }
 
   // 生成api
   function generateApi(el) {
@@ -34,13 +59,9 @@
       var method = methodDom.innerText.toLowerCase()
       text += `/** ${apiTitle} */\n`
 
-      var isClose = !apiDom.classList.contains('is-open')
-      var toggleButton = apiDom.querySelector('.opblock-summary-control')
-      isClose && toggleButton.click()
-      var paramsDom = apiDom.querySelector('.parameters')
+      var node = result[path][method]
       var paramsIsBody =
-        paramsDom && !!paramsDom.querySelector('tr[data-param-in="body"]')
-      isClose && toggleButton.click()
+        !!node.parameters && node.parameters.some((v) => v.in === 'body')
 
       var params = paramsIsBody ? 'data' : 'params'
       var path2 = path.replaceAll(
