@@ -128,16 +128,22 @@
   }
 
   function start() {
-    setTimeout(() => {
-      var opblocksDoms = Array.from(
-        document.querySelectorAll('.opblock-tag-section')
-      )
-      generateApiBtn(opblocksDoms)
-    }, 500)
+    var opblocksDoms = Array.from(
+      document.querySelectorAll('.opblock-tag-section')
+    )
+    generateApiBtn(opblocksDoms)
   }
-  start()
-  setTimeout(() => {
-    var select = document.querySelector('.topbar #select')
-    select && select.addEventListener('change', start)
-  }, 500)
+
+  var observer = new MutationObserver((entities) => {
+    if (entities.length) {
+      var entity = entities.at(-1)
+      if (!entity.addedNodes.length) return
+      var addedNode = entity.addedNodes[0]
+      var loaded = !addedNode.classList.contains('loading-container')
+      loaded && start()
+    }
+  })
+
+  var containerDom = document.querySelector('.swagger-container .swagger-ui')
+  observer.observe(containerDom, { childList: true })
 })()

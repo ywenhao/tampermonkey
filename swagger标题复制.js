@@ -27,28 +27,33 @@
   }
 
   function start() {
-    setTimeout(() => {
-      var els = Array.from(
-        document.querySelectorAll('.opblock-summary-description')
-      )
-      var paths = Array.from(document.querySelectorAll('.opblock-summary-path'))
-      els.forEach((el) => {
-        el.style.marginRight = 'auto'
-        el.style.maxWidth = 'max-content'
-        el.style.cursor = 'copy'
-        el.addEventListener('click', handleClick)
-      })
-      paths.forEach((el) => {
-        var a = el.querySelector('a')
-        a.style.cursor = 'copy'
-        el.addEventListener('click', handleClick)
-      })
-    }, 500)
+    var els = Array.from(
+      document.querySelectorAll('.opblock-summary-description')
+    )
+    var paths = Array.from(document.querySelectorAll('.opblock-summary-path'))
+    els.forEach((el) => {
+      el.style.marginRight = 'auto'
+      el.style.maxWidth = 'max-content'
+      el.style.cursor = 'copy'
+      el.addEventListener('click', handleClick)
+    })
+    paths.forEach((el) => {
+      var a = el.querySelector('a')
+      a.style.cursor = 'copy'
+      el.addEventListener('click', handleClick)
+    })
   }
 
-  start()
-  setTimeout(() => {
-    var select = document.querySelector('.topbar #select')
-    select && select.addEventListener('change', start)
-  }, 500)
+  var observer = new MutationObserver((entities) => {
+    if (entities.length) {
+      var entity = entities.at(-1)
+      if (!entity.addedNodes.length) return
+      var addedNode = entity.addedNodes[0]
+      var loaded = !addedNode.classList.contains('loading-container')
+      loaded && start()
+    }
+  })
+
+  var containerDom = document.querySelector('.swagger-container .swagger-ui')
+  observer.observe(containerDom, { childList: true })
 })()
