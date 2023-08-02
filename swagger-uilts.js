@@ -122,17 +122,36 @@
     )
     generateApiBtn(opblocksDoms)
   }
-  var observer = new MutationObserver((entities) => {
-    if (!entities.length) return
-    var entity = entities.at(-1)
-    if (!entity.addedNodes.length) return
-    var addedNode = entity.addedNodes[0]
-    var loaded = !addedNode.classList.contains('loading-container')
-    loaded && start()
-  })
 
-  var containerDom = document.querySelector('.swagger-container .swagger-ui')
-  observer.observe(containerDom, { childList: true })
+  function init() {
+    var observer = new MutationObserver((entities) => {
+      if (!entities.length) return
+      var entity = entities.at(-1)
+      if (!entity.addedNodes.length) return
+      var addedNode = entity.addedNodes[0]
+      var loaded = !addedNode.classList.contains('loading-container')
+      loaded && start()
+    })
+
+    var containerDom = document.querySelector('.swagger-container .swagger-ui')
+    observer.observe(containerDom, { childList: true })
+  }
+
+  var rootDom = document.getElementById('swagger-ui')
+  var getContainerDom = () =>
+    rootDom.querySelector('.swagger-container.swagger-ui')
+  if (getContainerDom()) {
+    init()
+  } else {
+    var rootObserver = new MutationObserver((entities) => {
+      if (!entities.length) return
+      var containerDom = getContainerDom()
+      if (!containerDom) return
+      init()
+      rootObserver.disconnect()
+    })
+    rootObserver.observe(rootDom, { childList: true })
+  }
 })()
 ;(function () {
   'use strict'
@@ -168,15 +187,33 @@
     })
   }
 
-  var observer = new MutationObserver((entities) => {
-    if (!entities.length) return
-    var entity = entities.at(-1)
-    if (!entity.addedNodes.length) return
-    var addedNode = entity.addedNodes[0]
-    var loaded = !addedNode.classList.contains('loading-container')
-    loaded && start()
-  })
+  function init() {
+    var observer = new MutationObserver((entities) => {
+      if (!entities.length) return
+      var entity = entities.at(-1)
+      if (!entity.addedNodes.length) return
+      var addedNode = entity.addedNodes[0]
+      var loaded = !addedNode.classList.contains('loading-container')
+      loaded && start()
+    })
 
-  var containerDom = document.querySelector('.swagger-container .swagger-ui')
-  observer.observe(containerDom, { childList: true })
+    var containerDom = document.querySelector('.swagger-container .swagger-ui')
+    observer.observe(containerDom, { childList: true })
+  }
+
+  var rootDom = document.getElementById('swagger-ui')
+  var getContainerDom = () =>
+    rootDom.querySelector('.swagger-container.swagger-ui')
+  if (getContainerDom()) {
+    init()
+  } else {
+    var rootObserver = new MutationObserver((entities) => {
+      if (!entities.length) return
+      var containerDom = getContainerDom()
+      if (!containerDom) return
+      init()
+      rootObserver.disconnect()
+    })
+    rootObserver.observe(rootDom, { childList: true })
+  }
 })()
