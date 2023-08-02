@@ -123,13 +123,12 @@
     generateApiBtn(opblocksDoms)
   }
   var observer = new MutationObserver((entities) => {
-    if (entities.length) {
-      var entity = entities.at(-1)
-      if (!entity.addedNodes.length) return
-      var addedNode = entity.addedNodes[0]
-      var loaded = !addedNode.classList.contains('loading-container')
-      loaded && start()
-    }
+    if (!entities.length) return
+    var entity = entities.at(-1)
+    if (!entity.addedNodes.length) return
+    var addedNode = entity.addedNodes[0]
+    var loaded = !addedNode.classList.contains('loading-container')
+    loaded && start()
   })
 
   var containerDom = document.querySelector('.swagger-container .swagger-ui')
@@ -170,13 +169,12 @@
   }
 
   var observer = new MutationObserver((entities) => {
-    if (entities.length) {
-      var entity = entities.at(-1)
-      if (!entity.addedNodes.length) return
-      var addedNode = entity.addedNodes[0]
-      var loaded = !addedNode.classList.contains('loading-container')
-      loaded && start()
-    }
+    if (!entities.length) return
+    var entity = entities.at(-1)
+    if (!entity.addedNodes.length) return
+    var addedNode = entity.addedNodes[0]
+    var loaded = !addedNode.classList.contains('loading-container')
+    loaded && start()
   })
 
   var containerDom = document.querySelector('.swagger-container .swagger-ui')
